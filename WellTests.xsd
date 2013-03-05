@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:aasg="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/WellTest/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gmlsf="http://www.opengis.net/gmlsf" targetNamespace="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/WellTest/1.0" elementFormDefault="qualified" version="1.09">
+	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
+	<xs:annotation>
+		<!-- This XSD document, including XML schema, indicates the content requested for data collected from well tests performed on boreholes for the AASG geothermal data project, including drill stem, production, G10, drawdown, buildup, and other tests.  Typically, information includes location information for the borehole or well, date and time of the test, formation pressure, and flow history.  The HeaderURI for a particular borehole is the cross-referencing link (foreign key) used to associate the record with additional information and metadata.  Each borehole should have a unique WellHeaderURI. -->
+		<!--This XSD document was created on 2013-03-05 by Christy Caudill, AZGS.  This schema is based on the data available in the AASG Web Feature Services created for drill stem tests reported by Arizona.-->
+		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
+			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
+			<gmlsf:GMLProfileSchema>
+http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gmlsf:GMLProfileSchema>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:element name="WellTest" type="aasg:WellTestType" substitutionGroup="gml:_Feature"/>
+	<xs:complexType name="WellTestType">
+		<xs:complexContent>
+			<xs:extension base="gml:AbstractFeatureType">
+				<xs:sequence>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="ObservationURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="WellHeaderURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="WellName" type="xs:string" minOccurs="0"/>
+					<xs:element name="APINo" type="xs:string" minOccurs="0"/>
+					<xs:element name="Label" type="xs:string"/>
+					<xs:element name="OtherID" type="xs:string" minOccurs="0"/>
+					<xs:element name="TestName" type="xs:string"/>
+					<xs:element name="TestType" type="xs:string"/>
+					<xs:element name="TestTypeDescription" type="xs:string" minOccurs="0"/>
+					<xs:element name="TestOperator" type="xs:string" minOccurs="0"/>
+					<xs:element name="TestDateTime" type="xs:string" minOccurs="0"/>
+					<xs:element name="TestNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="Field" type="xs:string" minOccurs="0"/>
+					<xs:element name="County" type="xs:string"/>
+					<xs:element name="State" type="xs:string"/>
+					<xs:element name="PLSS_Meridians" type="xs:string" minOccurs="0"/>
+					<xs:element name="TWP" type="xs:string" minOccurs="0"/>
+					<xs:element name="RGE" type="xs:string" minOccurs="0"/>
+					<xs:element name="Section_" type="xs:double" minOccurs="0"/>
+					<xs:element name="SectionPart" type="xs:string" minOccurs="0"/>
+					<xs:element name="Parcel" type="xs:string" minOccurs="0"/>
+					<xs:element name="UTM_E" type="xs:double" minOccurs="0"/>
+					<xs:element name="UTM_N" type="xs:double" minOccurs="0"/>
+					<xs:element name="UTMDatumZone" type="xs:string" minOccurs="0"/>
+					<xs:element name="LatDegree" type="xs:double"/>
+					<xs:element name="LongDegree" type="xs:double"/>
+					<xs:element name="SRS" type="xs:string"/>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string"/>
+					<xs:element name="TargetFormation" type="xs:string"/>
+					<xs:element name="TargetFeatureURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="DepthTopOpenZone" type="xs:double"/>
+					<xs:element name="ElevationTopOpenZone_msl" type="xs:double" minOccurs="0"/>
+					<xs:element name="DepthBottomOpenZone" type="xs:double"/>
+					<xs:element name="ElevationBottomOpenZone_msl" type="xs:double" minOccurs="0"/>
+					<xs:element name="UnitsOfMeasure" type="xs:string"/>
+					<xs:element name="DepthReferencePoint" type="xs:string" minOccurs="0"/>
+					<xs:element name="FormationTD" type="xs:string" minOccurs="0"/>
+					<xs:element name="HoleDiameter_in" type="xs:double" minOccurs="0"/>
+					<xs:element name="DrillPipeLength" type="xs:double" minOccurs="0"/>
+					<xs:element name="DrillPipeInternalDiameter_in" type="xs:string" minOccurs="0"/>
+					<xs:element name="FlowHistory" type="xs:string"/>
+					<xs:element name="PressureInitialShutIn" type="xs:double"/>
+					<xs:element name="TimeInitialShutIn_min" type="xs:double"/>
+					<xs:element name="PreferredPressure" type="xs:double"/>
+					<xs:element name="PressureFinalShutIn" type="xs:double"/>
+					<xs:element name="TimeFinalShutIn_min" type="xs:double"/>
+					<xs:element name="ShutInPressureMethod" type="xs:string" minOccurs="0"/>
+					<xs:element name="Units_Pressure" type="xs:string"/>
+					<xs:element name="HydrostaticPressure" type="xs:double"/>
+					<xs:element name="HydrostaticPressureMethod" type="xs:string"/>
+					<xs:element name="EquilibriumPressure" type="xs:double" minOccurs="0"/>
+					<xs:element name="EquilibriumPressureMethod" type="xs:string" minOccurs="0"/>
+					<xs:element name="FlowPressureMin" type="xs:double" minOccurs="0"/>
+					<xs:element name="FlowPressureMax" type="xs:double" minOccurs="0"/>
+					<xs:element name="FlowPressureMethod" type="xs:string" minOccurs="0"/>
+					<xs:element name="TestFluid" type="xs:string" minOccurs="0"/>
+					<xs:element name="FormationTemperature" type="xs:double" minOccurs="0"/>
+					<xs:element name="TemperatureCorrection" type="xs:double" minOccurs="0"/>
+					<xs:element name="TemperatureFlowing" type="xs:double" minOccurs="0"/>
+					<xs:element name="Units_Temperature" type="xs:string" minOccurs="0"/>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0"/>
+					<xs:element name="Source" type="xs:string"/>
+					<xs:element name="Notes" type="xs:string" minOccurs="0"/>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
