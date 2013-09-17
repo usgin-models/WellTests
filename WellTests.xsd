@@ -3,8 +3,8 @@
 	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
-		<!-- This XSD document, including XML schema, indicates the content requested for data collected from well tests performed on boreholes for the AASG geothermal data project, including drill stem, production, G10, drawdown, buildup, and other tests.  Typically, information includes location information for the borehole or well, date and time of the test, formation pressure, and flow history.  The HeaderURI for a particular borehole is the cross-referencing link (foreign key) used to associate the record with additional information and metadata.  Each borehole should have a unique WellHeaderURI. -->
-		<!--This XSD document was created on 2013-03-05 by Christy Caudill, AZGS.  This schema is based on the data available in the AASG Web Feature Services created for drill stem tests reported by Arizona.-->
+		<!-- This XSD document, including XML schema, indicates the content requested for data collected from well tests performed on boreholes for the AASG geothermal data project, including drill stem, production, G10, drawdown, buildup, and other tests. Typically, information includes location information for the borehole or well, date and time of the test, formation pressure, and flow history. The HeaderURI for a particular borehole is the cross-referencing link (foreign key) used to associate the record with additional information and metadata. Each borehole should have a unique WellHeaderURI. -->
+		<!--Annotated version 1.0.1. This XSD document was created on 2013-03-05 by Christy Caudill, AZGS. This schema is based on the data available in the AASG Web Feature Services created for drill stem tests reported by Arizona. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS. -->
 		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
 			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
 			<gmlsf:GMLProfileSchema>
@@ -16,8 +16,15 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 		<xs:complexContent>
 			<xs:extension base="gml:AbstractFeatureType">
 				<xs:sequence>
-					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Integer record count, added by ArcGIS servers during service deployment; not required but cannot be removed when deploying from ArcGIS feature class. Not user maintained, so this element appears in XML implementation but not in the Content Model Template.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="ObservationURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for this observation. This is the identifier (Uniform Resource Identifier) that will be used to cross-reference data, samples, and other observations to the observation represented by this record. This URI should incorporate the name of the  test. Best practice is to define an http URI that will dereference to a normative description of the observation. USGIN URI's may be redirected to any URL using the http://resources.usgin.org redirector; contact the USGIN development team at AZGS for instructions.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
@@ -25,80 +32,332 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 						</xs:simpleType>
 					</xs:element>
 					<xs:element name="WellHeaderURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for this observation. This is the identifier (Uniform Resource Identifier) that will be used to cross-reference data, samples, and other observations to the observation represented by this record. Best practice is to define an http URI that will dereference to a normative description of the observation. USGIN URI's may be redirected to any URL using the http://resources.usgin.org redirector; contact the USGIN development team at AZGS for instructions.
+
+							If the API number indicates multiple instances of reentry, recompletion, sidetrack, etc., each instance is to have its own HeaderURI.  For example, the API number 42-501-20130-0300 indicates a well (42-501-20130) with three sidetracks, for a total of four total boreholes (-0000,-0100, -0200,-0300), each of which should have its own database record and HeaderURI.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="WellName" type="xs:string" minOccurs="0"/>
-					<xs:element name="APINo" type="xs:string" minOccurs="0"/>
-					<xs:element name="Label" type="xs:string"/>
-					<xs:element name="OtherID" type="xs:string" minOccurs="0"/>
-					<xs:element name="TestName" type="xs:string"/>
-					<xs:element name="TestType" type="xs:string"/>
-					<xs:element name="TestTypeDescription" type="xs:string" minOccurs="0"/>
-					<xs:element name="TestOperator" type="xs:string" minOccurs="0"/>
-					<xs:element name="TestDateTime" type="xs:string" minOccurs="0"/>
-					<xs:element name="TestNumber" type="xs:string" minOccurs="0"/>
-					<xs:element name="Field" type="xs:string" minOccurs="0"/>
-					<xs:element name="County" type="xs:string"/>
-					<xs:element name="State" type="xs:string"/>
-					<xs:element name="PLSS_Meridians" type="xs:string" minOccurs="0"/>
-					<xs:element name="TWP" type="xs:string" minOccurs="0"/>
-					<xs:element name="RGE" type="xs:string" minOccurs="0"/>
-					<xs:element name="Section_" type="xs:double" minOccurs="0"/>
-					<xs:element name="SectionPart" type="xs:string" minOccurs="0"/>
-					<xs:element name="Parcel" type="xs:string" minOccurs="0"/>
-					<xs:element name="UTM_E" type="xs:double" minOccurs="0"/>
-					<xs:element name="UTM_N" type="xs:double" minOccurs="0"/>
-					<xs:element name="UTMDatumZone" type="xs:string" minOccurs="0"/>
-					<xs:element name="LatDegree" type="xs:double"/>
-					<xs:element name="LongDegree" type="xs:double"/>
-					<xs:element name="SRS" type="xs:string"/>
-					<xs:element name="LocationUncertaintyStatement" type="xs:string"/>
-					<xs:element name="TargetFormation" type="xs:string"/>
+					<xs:element name="WellName" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Human-intelligible name by which the borehole identified by the HeaderURI is known. Convention for wellName is: Name = Operator + Well No. + Lease Owner. A well may consist of multiple boreholes (wellbores). If these are distinguished by different records in this table, they should have the same well names, but distinct BoreholeNames, and at least one identifier (APINo or OtherID) that is unique to the borehole. Conditional obligation - If the HeaderURI identifies a borehole which is one of several within a well, then a BoreholeName is mandatory. Each borehole should have a unique BoreholeName. Separate multiple BoreholeNames with the pipe character '|'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="APINo" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>API number for the the wellbore/borehole identified by the HeaderURI. If an API number is unavailable this field is empty. Usage of hyphens is optional, according to standard practice in each state. API number refers to the American Petroleum Institute number. Each oil, gas, or geothermal well drilled in the United States has a unique API number; this number identifies all boreholes or recompletions associated with the original wellbore. See http://www.spwla.org/technical/api-technical for more information about API numbering.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Label" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Short text string for labeling the feature on maps. Can be the same as feature name. A label may be an OtherLocationName, OtherID or the Name or some combination.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OtherID" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Alternative identifier(s) for observation or site information. Indicate the authority from which the OtherID is derived with a short (lower case) prefix delimited by a colon ':' If identifiers from multiple different authorities are available, delimit these identifiers with the pipe character '|'. For example, if a well were known to the Arizona Geological Survey (AZGS) by the id number 1337, the identifier string would be azgs:1337. Any such prefixes used to scope identifiers should be explained in the dataset metadata.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TestName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The human-intelligible well test name using "well name (or a given test name) -test number- run number" used in providing a unique ObservationURI. Multiple test and/or runs  would each have a unique name.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TestType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Spell out the test type term; use controlled vocabulary, adding terms as needed.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TestTypeDescription" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>If 'Other' is indicated in TestType field, provide brief explanation and/or name of test.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TestOperator" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name person or company, either proprietor or lessee, actually conducting the well test identified by the ObservationURI. Note that Operator must be the active operator on the reported StatusDate. for water wells, operator is owner of well. Ideally might be an http URI that can dereference to description/metadata for operator.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TestDateTime" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date on which test was made. Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TestNumber" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Often there are multiple tests (and in the case of drill stem, nultiple runs within a test)  performed on a single borehole.  If this is the case, each test on a well can be assigned a number "1-1, 1-2 for "test 1 run 1" and "test 1 run 2", or just 1,2, 3... for a test or run only and notated in the report, etc.  The TestNumber is incorportated into the Test Name and ObservationURI for uniqueness.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Field" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of the field in which the borehole is located. If multiple names are or have been used for the field, separate values with a pipe '|' character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="County" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Required. County name. If unknown or not applicable use 'missing'. If offshore, specify 'offshore' in this field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="State" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Required. State name without abbreviations. If unknown or not applicable use 'missing'. For offshore locations, specify the governing or nearest state and list the county as 'offshore'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PLSS_Meridians" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>List north-south baseline and east-west meridian that Townships and Ranges are referenced to.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TWP" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Township in PLSS grid, relative to reported baseline. Formatting and punctuation should be consistent for all locations referenced to the same baseline and meridian. Recommend adding leading '0's so that all number strings are the same length (typically 2 or occasionally 3 digits). Examples 01N, 112S, 001N.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RGE" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Range in PLSS grid, relative to reported meridian. Formatting and punctuation should be consistent for all locations referenced to the same baseline meridian. See instructions on TWP field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Section_" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>PLSS section number. Must be numeric or null. Some surveys include half sections indicated by a 'nn.5' designation, where n indicates a number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SectionPart" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Subdivision of a PLSS section.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Parcel" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Legal parcel identifier, or block number, or other parcel or location identifier.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UTM_E" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>UTM easting coordinate as decimal number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UTM_N" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>UTM northing coordinate as decimal number.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UTMDatumZone" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The datum and UTM zone for the reported coordinates. Datum for most locations should be NAD27 or NAD83.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LatDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Latitude coordinate for the surface location of the feature (use center point for areas); values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LongDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Longitude coordinate for the surface location of the feature (use center point for areas); values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SRS" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The spatial reference system. It is recommended that an EPSG code be used to identify the SRS used to specify the location.  If an EPSG code is used, identify it as such with the prefix 'EPSG:' For common EPSG codes, see the Data Valid Terms tab. EPSG:4326 is the identifier for WGS84, and should be the text in this field. EPSG stands for European Petroleum Survey Group. EPSSG codes can be dereferenced by putting the code in this URL (replace 4326) http://spatialreference.org/ref/epsg/4326/.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Information on how the original location was determined, e.g.: 1:250,000 map, gps unit, Google Earth, PLSS Conversion, Spatial Datum Conversion, e.g., NAD27 to WGS84.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TargetFormation" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Formation targeted for testing. Spell out formal or informal geologic unit/formation name. Separate multiple names by pipe '|' characters.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="TargetFeatureURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Unique identifier that specifies the feature targeted by this test: e.g. a geologic feature, aquifer or facility structure. Ideally, the identifier is an http URI that will dereference to a known, useful representation of the feature. This identifier will be used to cross reference the test to other information related to this feature.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="DepthTopOpenZone" type="xs:double"/>
-					<xs:element name="ElevationTopOpenZone_msl" type="xs:double" minOccurs="0"/>
-					<xs:element name="DepthBottomOpenZone" type="xs:double"/>
-					<xs:element name="ElevationBottomOpenZone_msl" type="xs:double" minOccurs="0"/>
-					<xs:element name="UnitsOfMeasure" type="xs:string"/>
-					<xs:element name="DepthReferencePoint" type="xs:string" minOccurs="0"/>
-					<xs:element name="FormationTD" type="xs:string" minOccurs="0"/>
-					<xs:element name="HoleDiameter_in" type="xs:double" minOccurs="0"/>
-					<xs:element name="DrillPipeLength" type="xs:double" minOccurs="0"/>
-					<xs:element name="DrillPipeInternalDiameter_in" type="xs:string" minOccurs="0"/>
-					<xs:element name="FlowHistory" type="xs:string"/>
-					<xs:element name="PressureInitialShutIn" type="xs:double"/>
-					<xs:element name="TimeInitialShutIn_min" type="xs:double"/>
-					<xs:element name="PreferredPressure" type="xs:double"/>
-					<xs:element name="PressureFinalShutIn" type="xs:double"/>
-					<xs:element name="TimeFinalShutIn_min" type="xs:double"/>
-					<xs:element name="ShutInPressureMethod" type="xs:string" minOccurs="0"/>
-					<xs:element name="Units_Pressure" type="xs:string"/>
-					<xs:element name="HydrostaticPressure" type="xs:double"/>
-					<xs:element name="HydrostaticPressureMethod" type="xs:string"/>
-					<xs:element name="EquilibriumPressure" type="xs:double" minOccurs="0"/>
-					<xs:element name="EquilibriumPressureMethod" type="xs:string" minOccurs="0"/>
-					<xs:element name="FlowPressureMin" type="xs:double" minOccurs="0"/>
-					<xs:element name="FlowPressureMax" type="xs:double" minOccurs="0"/>
-					<xs:element name="FlowPressureMethod" type="xs:string" minOccurs="0"/>
-					<xs:element name="TestFluid" type="xs:string" minOccurs="0"/>
-					<xs:element name="FormationTemperature" type="xs:double" minOccurs="0"/>
-					<xs:element name="TemperatureCorrection" type="xs:double" minOccurs="0"/>
-					<xs:element name="TemperatureFlowing" type="xs:double" minOccurs="0"/>
-					<xs:element name="Units_Temperature" type="xs:string" minOccurs="0"/>
-					<xs:element name="RelatedResource" type="xs:string" minOccurs="0"/>
-					<xs:element name="Source" type="xs:string"/>
-					<xs:element name="Notes" type="xs:string" minOccurs="0"/>
-					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:element name="DepthTopOpenZone" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Depth to the top of the open zone of the test interval.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ElevationTopOpenZone_msl" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Elevation of the top of the interval being tested. Relative to MSL.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthBottomOpenZone" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Depth to the bottom of the open zone of the test interval.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ElevationBottomOpenZone_msl" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Elevation of the bottom of the interval being tested. Relative to MSL.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UnitsOfMeasure" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Units used to report all elevation and depth information, decimal meters or feet.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthReferencePoint" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Identifier for elevation datum to which other elevations are referred. Default shall be sea level (MSL).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FormationTD" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of geologic unit at the bottom of the borehole.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="HoleDiameter_in" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Diameter in decimal format of the open hole at the depth tested. If the hole is cased this would be the internal diameter of the casing.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DrillPipeLength" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Total length in decimal format of the Drill pipe in the hole.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DrillPipeInternalDiameter_in" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The internal diameter of the pipe in decimal inches.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FlowHistory" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Long text field used to summarize flow history for test, as a series of records using this template (use pipe '|' character to separate records): operation | startTime | endTime |  duration | chokeSize | pressure | temperature | recoveryColumn |  recoveryType | note</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PressureInitialShutIn" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Initial formation pressure after the comparatively short shut-in period (commonly 5 to 10 minutes) following the initial flow period of a drill stem test.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TimeInitialShutIn_min" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Initial shut in time duration in minutes.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PreferredPressure" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Preferred pressure for formation to meet or exceed production goals.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PressureFinalShutIn" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Pressure after the well has been completely shut in for a final period of time.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TimeFinalShutIn_min" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Final shut in time duration in minutes.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ShutInPressureMethod" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Descriptive term/Measurement procedure or method used to determine the shut in pressure. May be measured at wellhead or down hole/bottom hole. Data provider should indicate QA/QC performed on the data, including individual or institution, time frame and depth of quality check.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Units_Pressure" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>UOM for all pressure entries: PSI (pounds per square inch) used primarily in the United States, or Pa (pascals) the International System of Units (SI) for pressure. Pa is equal to N/m2 or kg·m−1·s−2.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="HydrostaticPressure" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>The pressure at any point in a column of fluid caused by the weight of fluid above that point. Weight of the drill fluid in the hole at the start of the test.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="HydrostaticPressureMethod" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Descriptive term/Measurement procedure or method of obtaining the hydrostatic pressure. Data provider should indicate QA/QC performed on the data, including individual or institution, time frame and depth of quality check.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EquilibriumPressure" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Final pressure determination for the tested unit, based on interpretation of measured pressures from test; intended to represent best estimate of equilibrium pressure. If there is a long shut-in time, the shut-in pressure should be close to the equilibrium pressure. Measurement unit used in exchange documents is pounds of pressure.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EquilibriumPressureMethod" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Text description of how the measurement was made - instrumentation, logging rate, correction or extrapolation process, how time since circulation was determined, etc. Data provider should indicate QA/QC performed on the data, including individual or institution, time frame and depth of quality check.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FlowPressureMin" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Minimum Flow Pressure in the pipe, reported in decimal format.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FlowPressureMax" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Maximum flow pressure should be equivalent to PressureFinalShutIn; reported in decimal format.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FlowPressureMethod" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Text description of how the measurement was made - instrumentation, logging rate, correction or extrapolation process, how time since circulation was determined, etc. Data provider should indicate QA/QC performed on the data, including individual or institution, time frame and depth of quality check. Separate different methods with a pipe '|' character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TestFluid" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Text field to report the drill test fluid used. Use Controlled Vocabulary.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FormationTemperature" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Temperature of the geologic formation, in decimal format. Degrees Celsius is preferred and will be reported for consistency in service implementations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TemperatureCorrection" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Report the corrected formation temperature in this field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TemperatureFlowing" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Report the temperature of the fluid flowing from the well.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Units_Temperature" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Temperature, in decimal format. Degrees Celsius is preferred and will be reported for consistency in service implementations.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This may be one to many http links to resources (logs, pictures or other documents if available online. Should be an http:// address (URL)) related to the observation described in each record. Delimit multiple values with the pipe '|' character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Source" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Mandatory. Short text explanation of source of information defining this feature; may be author-date type citation, but should include some indication of how digital data originated. If unpublished data, provide researcher name, date and research institution for proper citation. Separate multiple citations with pipe '|' character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Notes" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Any additional information to be provided, including description and other data not captured by the template, details about collection method, contact information for related parties (original collector, project PI), collection platform or Launch, etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Shape" type="gml:PointPropertyType">
+						<xs:annotation>
+							<xs:documentation>Added by GIS for WFS service; this element appears in the xml output, but is generated during service deployment from the latitude and longitude, therefore it doesn't appear in the template.</xs:documentation>
+						</xs:annotation>
+						</xs:element>
 					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
