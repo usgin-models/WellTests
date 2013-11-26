@@ -4,7 +4,7 @@
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
 		<!-- This XSD document, including XML schema, indicates the content requested for data collected from well tests performed on boreholes for the AASG geothermal data project, including drill stem, production, G10, drawdown, buildup, and other tests. Typically, information includes location information for the borehole or well, date and time of the test, formation pressure, and flow history. The HeaderURI for a particular borehole is the cross-referencing link (foreign key) used to associate the record with additional information and metadata. Each borehole should have a unique WellHeaderURI. -->
-		<!--Annotated version 1.0.1. This XSD document was created on 2013-03-05 by Christy Caudill, AZGS. This schema is based on the data available in the AASG Web Feature Services created for drill stem tests reported by Arizona. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS. -->
+		<!--Version 1.0.2 changed date types to 'dateTime'. Annotated version 1.0.1. This XSD document was created on 2013-03-05 by Christy Caudill, AZGS. This schema is based on the data available in the AASG Web Feature Services created for drill stem tests reported by Arizona. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS. -->
 		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
 			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
 			<gmlsf:GMLProfileSchema>
@@ -83,7 +83,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 							<xs:documentation>Name person or company, either proprietor or lessee, actually conducting the well test identified by the ObservationURI. Note that Operator must be the active operator on the reported StatusDate. for water wells, operator is owner of well. Ideally might be an http URI that can dereference to description/metadata for operator.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="TestDateTime" type="xs:string" minOccurs="0">
+					<xs:element name="TestDateTime" type="xs:dateTime" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>Date on which test was made. Day, month and year must be specified; Excel will display using ISO 8601 date and time (yyyy-mm-ddT:hh:mm) format. If only the year is known, enter month and day as 'Jan. 1', (or '1/1/', or '1-1-', or 'January 1,'). All dates will be converted to yyyy-mm-ddThh:mm.</xs:documentation>
 						</xs:annotation>
@@ -357,7 +357,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 						<xs:annotation>
 							<xs:documentation>Added by GIS for WFS service; this element appears in the xml output, but is generated during service deployment from the latitude and longitude, therefore it doesn't appear in the template.</xs:documentation>
 						</xs:annotation>
-						</xs:element>
+					</xs:element>
 					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
